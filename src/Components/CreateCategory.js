@@ -4,8 +4,6 @@ import axios from "axios";
 const CreateCategory = ({bid, history}) => {
     const [name, setName] = useState('');
 
-    console.log('name', name);
-
     const changeName = (e) => {
         setName(e.target.value);
     };
@@ -33,8 +31,6 @@ const CreateCategory = ({bid, history}) => {
                 <input type="text" onChange={changeName} value={name} />
                 <input type="submit" name="Submit" />
             </form>
-            {bid}
-
         </div>
     )
 };

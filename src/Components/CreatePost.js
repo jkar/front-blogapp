@@ -4,9 +4,8 @@ import axios from "axios";
 const CreatePost = ({ bid, history }) => {
     const [allcids, setAllcids] = useState(null);
     const [selectedcids, setSelectedcids] = useState([]);
-
-    console.log(allcids);
-    console.log('selcid', selectedcids);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     const getCategories = async (id) => {
         try {
@@ -27,9 +26,18 @@ const CreatePost = ({ bid, history }) => {
     }, []);
 
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
-
+        try {
+            const data = await axios.post('http://localhost:3001/user/createpost', {
+                "title": title,
+                "content": content,
+                "cid": selectedcids
+            });
+            history.push('/');
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 
@@ -44,6 +52,14 @@ const CreatePost = ({ bid, history }) => {
         }
     };
 
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+    };
+
     if (allcids === null) {
         return null;
     }
@@ -51,6 +67,7 @@ const CreatePost = ({ bid, history }) => {
     return (
         <div>
             <form onSubmit={submit}>
+                <h3>Select Categories</h3>
                 {allcids.map((c, index) => {
                     return (
                         <div key={index}>
@@ -59,6 +76,11 @@ const CreatePost = ({ bid, history }) => {
                         </div>
                     )
                 })}
+                <label>Title</label>
+                <input type="text" value={title} onChange={handleTitleChange} />
+                <label>Content</label>
+                <input type="text" value={content} onChange={handleContentChange} />
+                <input type="submit" name="Submit" />
             </form>
         </div>
     )
