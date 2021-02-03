@@ -16,8 +16,6 @@ function App() {
     setBlogs(data.data);
   };
 
-  console.log('bl', blogs);
-
   useEffect(() => {
     getBlogs();
   }, []);

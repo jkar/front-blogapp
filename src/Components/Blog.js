@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Post from "./Post";
 import ShowPosts from "./ShowPosts";
 import Category from "./Category";
 
-const Blog = ({blogs, match}) => {
+const Blog = ({blogs}) => {
     const id = useParams().id;
 
 
@@ -21,11 +21,9 @@ const Blog = ({blogs, match}) => {
         setPosts(data.data);
     };
 
-    console.log('posts', posts);
-
     useEffect(() => {
         setBlog(blogs[id]);
-        getPosts(blogs[id].id);
+        getPosts(blogs[id].id);      
     },[id]);
 
     if (blog == null) {
@@ -37,7 +35,7 @@ const Blog = ({blogs, match}) => {
         <div>
             <Switch>
                 <Route exact path={`/blog/${id}`} component={() => <ShowPosts blog={blog} posts={posts} id={id} />} />
-                <Route path={`/blog/${id}/post/:id`} component={() => <Post posts={posts} /> } />
+                <Route path={`/blog/${id}/post/:id`} component={() => <Post posts={posts} bid={id} /> } />
                 <Route path={`/blog/${id}/category/:id`} component={() => <Category />} />
             </Switch>
             

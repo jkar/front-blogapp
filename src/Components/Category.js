@@ -4,14 +4,9 @@ import axios from "axios";
 
 const Category = () => {
     const id = useParams().id;
-    // console.log('cid', id);
 
     const [category, setCategory] = useState(null);
     const [posts, setPosts] = useState([]);
-
-    if (posts.length !== 0) {
-        console.log('postsss', posts[0]);
-    }
 
     const getPosts = async (cid) => {
         try {
