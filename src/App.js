@@ -2,7 +2,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
 import Main from "./Components/Main";
 import Blog from './Components/Blog';
 
