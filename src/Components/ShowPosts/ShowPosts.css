@@ -2,3 +2,10 @@
     width: 85%;
     margin: 0 50px 0 50px;
 }
+
+@media only screen and (max-width: 970px) {
+    .show-posts {
+        width: 100%;
+        margin: 0px;
+    }
+}

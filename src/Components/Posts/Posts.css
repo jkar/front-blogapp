@@ -15,3 +15,7 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+#posts div h1 a {
+    text-decoration: none;
+}

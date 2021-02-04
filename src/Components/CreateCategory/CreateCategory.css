@@ -4,13 +4,17 @@
     text-align: start;
 }
 
+#create-category h2 {
+  text-align: center;
+}
+
 #create-category form {
     border-radius: 5px;
     background-color: #d3d3d33b;
     padding: 25px 5%;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
+    width: 40%;
 }
 
 #create-category form input[type=text], select {
@@ -32,4 +36,14 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  @media only screen and (max-width: 970px) {
+    #create-category {
+      width: 100%;
+      margin: 0px;
+    }
+    #create-category form {
+      width: 75%;
+    }
   }
