@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+import './Blog.css';
 import axios from "axios";
-import Post from "./Post";
-import ShowPosts from "./ShowPosts";
-import Category from "./Category";
-import CreateCategory from "./CreateCategory";
-import CreatePost from "./CreatePost";
+import Post from "../Post/Post";
+import ShowPosts from "../ShowPosts/ShowPosts";
+import Category from "../Category/Category";
+import CreateCategory from "../CreateCategory/CreateCategory";
+import CreatePost from "../CreatePost/CreatePost";
 
 const Blog = ({blogs}) => {
     const id = useParams().id;
@@ -35,7 +36,7 @@ const Blog = ({blogs}) => {
 
     return (
         
-        <div>
+        <div id="blog">
             <nav>
                 <Link to={`/blog/${id}/createCategory`}>Create Category</Link>
                 <Link to={`/blog/${id}/createPost`}>Create Post</Link>

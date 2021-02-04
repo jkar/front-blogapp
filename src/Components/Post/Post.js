@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './Post.css';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -33,20 +34,22 @@ const Post = ({posts, bid}) => {
     }
 
     return (
-        <>
-            <ul>
-                {categories.map((c, index) => {
+        <div id="post">
+            <div className="container">
+                <ul>
+                    {categories.map((c, index) => {
 
-                    return (
-                        <li key={c.category.id}><Link  to={`/blog/${bid}/category/${c.category.id}`}>{c.category.name}</Link></li>
-                    )
-                })}
-            </ul>
-            <div>
-                <h1>{post.title}</h1>
-                <p>{post.content}</p>
+                        return (
+                            <li key={c.category.id}><Link  to={`/blog/${bid}/category/${c.category.id}`}>{c.category.name}</Link></li>
+                        )
+                    })}
+                </ul>
+                <div>
+                    <h1>{post.title}</h1>
+                    <p>{post.content}</p>
+                </div>
             </div>
-        </>
+        </div>
     )
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
+import './Posts.css';
 import { Link } from 'react-router-dom';
 
 const Posts = ({posts, id}) => {
     return (
-        <div>
+        <div id="posts">
             {posts.map((post, index) => {
 
                 let content = post.content.split(' ').slice(0,10);

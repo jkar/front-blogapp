@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './CreatePost.css';
 import axios from "axios";
 
 const CreatePost = ({ bid, history }) => {
@@ -65,17 +66,19 @@ const CreatePost = ({ bid, history }) => {
     }
 
     return (
-        <div>
+        <div id="create-post">
+            <h2>Create Post</h2>
             <form onSubmit={submit}>
                 <h3>Select Categories</h3>
                 {allcids.map((c, index) => {
                     return (
                         <div key={index}>
-                            <label>{c.name}</label>
                             <input type="checkbox" onChange={handleCheckboxes} id={index} name={c.name} value={c.id}></input>
+                            <label>{c.name}</label>
                         </div>
                     )
                 })}
+                <br />
                 <label>Title</label>
                 <input type="text" value={title} onChange={handleTitleChange} />
                 <label>Content</label>

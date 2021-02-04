@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './CreateCategory.css';
 import axios from "axios";
 
 const CreateCategory = ({bid, history}) => {
@@ -24,7 +25,7 @@ const CreateCategory = ({bid, history}) => {
     };
 
     return (
-        <div>
+        <div id="create-category">
             <h2>Create Category</h2>
             <form onSubmit={submit}>
                 <label>Name</label>

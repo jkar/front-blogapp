@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './Category.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -33,16 +34,18 @@ const Category = () => {
     }
 
     return (
-        <div>
-            {category}
-            {posts.map((post, index) => {
-                return (
-                    <div key={index}>
-                        <h1>{post.title}</h1>
-                        <p>{post.content}</p>
-                    </div>
-                )
-            })}
+        <div id="category">
+            <h3>Category: </h3> <p> {category}</p>
+            <div>
+                {posts.map((post, index) => {
+                    return (
+                        <div key={index}>
+                            <h1>{post.title}</h1>
+                            <p>{post.content}</p>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
