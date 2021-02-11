@@ -3,6 +3,7 @@ import './Post.css';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import base_url from "../../API";
 
 const Post = ({posts, bid}) => {
     const id = useParams().id;
@@ -17,7 +18,7 @@ const Post = ({posts, bid}) => {
             const params = {
                 id : posts[id].id
             }
-            const data = await axios.get('http://localhost:3001/blog/categories', { params : params });
+            const data = await axios.get(`${base_url}/blog/categories`, { params : params });
             setCategories(data.data);
             setPost(posts[id]);
         } catch (error) {

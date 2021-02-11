@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './CreateCategory.css';
 import axios from "axios";
+import base_url from "../../API";
 
 const CreateCategory = ({bid, history}) => {
     const [name, setName] = useState('');
@@ -13,7 +14,7 @@ const CreateCategory = ({bid, history}) => {
         e.preventDefault();
 
         try {
-            const data = await axios.post('http://localhost:3001/user/createcategory', {
+            const data = await axios.post(`${base_url}/user/createcategory`, {
                 "id": bid,
                 "name": name
             });

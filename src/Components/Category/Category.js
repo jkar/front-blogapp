@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Category.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import base_url from "../../API";
 
 const Category = () => {
     const id = useParams().id;
@@ -14,7 +15,7 @@ const Category = () => {
             const params = {
                 id : cid
             }
-            const data = await axios.get('http://localhost:3001/blog/specificposts', { params: params });
+            const data = await axios.get(`${base_url}/blog/specificposts`, { params: params });
             const p = data.data.map(cat => {
                 return cat.post
             })

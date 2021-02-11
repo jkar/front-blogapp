@@ -8,6 +8,7 @@ import ShowPosts from "../ShowPosts/ShowPosts";
 import Category from "../Category/Category";
 import CreateCategory from "../CreateCategory/CreateCategory";
 import CreatePost from "../CreatePost/CreatePost";
+import base_url from '../../API';
 
 const Blog = ({blogs}) => {
     const id = useParams().id;
@@ -21,7 +22,7 @@ const Blog = ({blogs}) => {
         const params = {
             id : id
           }
-        const data = await axios.get('http://localhost:3001/blog/posts', {params : params});
+        const data = await axios.get(`${base_url}/blog/posts`, {params : params});
         setPosts(data.data);
     };
 

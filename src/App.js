@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "./Components/Header/Header";
 import Main from "./Components/Main";
 import Blog from './Components/Blog/Blog';
+import base_url  from './API';
 
 function App() {
   
@@ -12,7 +13,7 @@ function App() {
 
 
   const getBlogs = async () => {
-    const data = await axios.get('http://localhost:3001/blog/blogs');
+    const data = await axios.get(`${base_url}/blog/blogs`);
     setBlogs(data.data);
   };
 

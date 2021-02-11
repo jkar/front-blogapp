@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './CreatePost.css';
 import axios from "axios";
+import base_url from "../../API";
 
 const CreatePost = ({ bid, history }) => {
     const [allcids, setAllcids] = useState(null);
@@ -13,7 +14,7 @@ const CreatePost = ({ bid, history }) => {
             const params = {
                 id : id
             }
-            const data = await axios.get('http://localhost:3001/user/categories', { params : params } );
+            const data = await axios.get(`${base_url}/user/categories`, { params : params } );
             setAllcids(data.data);
              
         } catch (error) {
@@ -30,7 +31,7 @@ const CreatePost = ({ bid, history }) => {
     const submit = async (e) => {
         e.preventDefault();
         try {
-            const data = await axios.post('http://localhost:3001/user/createpost', {
+            const data = await axios.post(`${base_url}/user/createpost`, {
                 "title": title,
                 "content": content,
                 "cid": selectedcids
