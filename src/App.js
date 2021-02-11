@@ -5,11 +5,15 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "./Components/Header/Header";
 import Main from "./Components/Main";
 import Blog from './Components/Blog/Blog';
+import LogIn from "./Components/LogIn/LogIn";
 import base_url  from './API';
 
 function App() {
   
   const [blogs, setBlogs] = useState([]);
+  const [user, setUser] = useState(null);
+
+  console.log('user', user);
 
 
   const getBlogs = async () => {
@@ -21,14 +25,29 @@ function App() {
     getBlogs();
   }, []);
 
+  useEffect(() => {
+    
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, [])
+
+  const logOut = () => {
+    window.localStorage.removeItem('loggedUser');
+    setUser(null);
+  };
+
 
   return (
     <div className="App">
       {blogs.length !== 0 ? 
       <div>
-        <Header blogs={blogs} />
+        <Header blogs={blogs} user={user} logOut={logOut} />
         <Switch>
           <Route key={blogs.length} exact path='/' component={()=> <Main />} />
+          <Route path='/login' component={()=> <LogIn setUser={setUser} /> } />
           <Route path="/blog/:id" component={() => <Blog blogs={blogs} /> } />
         </Switch>  
       </div>
