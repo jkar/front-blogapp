@@ -10,9 +10,8 @@ import CreateCategory from "../CreateCategory/CreateCategory";
 import CreatePost from "../CreatePost/CreatePost";
 import base_url from '../../API';
 
-const Blog = ({blogs}) => {
+const Blog = ({blogs, user}) => {
     const id = useParams().id;
-
 
     const [blog, setBlog] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -38,15 +37,22 @@ const Blog = ({blogs}) => {
     return (
         
         <div id="blog">
+            {
+                user !== null && blogs[id].id === user.userForToken.bid ?
+
+            
             <nav>
                 <Link to={`/blog/${id}/createCategory`}>Create Category</Link>
                 <Link to={`/blog/${id}/createPost`}>Create Post</Link>
             </nav>
+            :
+            null
+            }
             <Switch>
                 <Route exact path={`/blog/${id}`} component={() => <ShowPosts blog={blog} posts={posts} id={id} />} />
                 <Route path={`/blog/${id}/post/:id`} component={() => <Post posts={posts} bid={id} /> } />
                 <Route path={`/blog/${id}/category/:id`} component={() => <Category />} />
-                <Route path={`/blog/${id}/createCategory`} component={()=> <CreateCategory bid={blog.id} history={history} /> } />
+                <Route path={`/blog/${id}/createCategory`} component={()=> <CreateCategory bid={blog.id} history={history} user={user} /> } />
                 <Route path={`/blog/${id}/createPost`} component={()=> <CreatePost bid={blog.id} history={history} /> } />
             </Switch>
             

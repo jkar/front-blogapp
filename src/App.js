@@ -48,7 +48,7 @@ function App() {
         <Switch>
           <Route key={blogs.length} exact path='/' component={()=> <Main />} />
           <Route path='/login' component={()=> <LogIn setUser={setUser} /> } />
-          <Route path="/blog/:id" component={() => <Blog blogs={blogs} /> } />
+          <Route path="/blog/:id" component={() => <Blog blogs={blogs} user={user} /> } />
         </Switch>  
       </div>
         : 

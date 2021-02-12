@@ -3,7 +3,7 @@ import './CreateCategory.css';
 import axios from "axios";
 import base_url from "../../API";
 
-const CreateCategory = ({bid, history}) => {
+const CreateCategory = ({bid, history, user}) => {
     const [name, setName] = useState('');
 
     const changeName = (e) => {
@@ -14,10 +14,15 @@ const CreateCategory = ({bid, history}) => {
         e.preventDefault();
 
         try {
+            const config = {
+                headers: {
+                    'Authorization' : `Bearer ${user.token}`
+                }
+            };
             const data = await axios.post(`${base_url}/user/createcategory`, {
                 "id": bid,
                 "name": name
-            });
+            }, config);
             history.push('/');
             console.log('success', data);
         } catch (error) {
