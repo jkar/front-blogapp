@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import './CreateCategory.css';
 import axios from "axios";
 import base_url from "../../API";
 
-const CreateCategory = ({bid, history, user}) => {
+const CreateCategory = ({bid, history, user, setMessage, setErrorMessage}) => {
     const [name, setName] = useState('');
+    const _isMounted = useRef(true); // Initial value _isMounted = true
+
+    useEffect(()=> {
+        return () => { // ComponentWillUnmount in Class Component
+            _isMounted.current = false;
+            setName('');
+        }
+    },[]);
 
     const changeName = (e) => {
         setName(e.target.value);
@@ -12,21 +20,30 @@ const CreateCategory = ({bid, history, user}) => {
 
     const submit = async (e) => {
         e.preventDefault();
+        if (_isMounted.current) {
+            try {
+                const config = {
+                    headers: {
+                        'Authorization' : `Bearer ${user.token}`
 
-        try {
-            const config = {
-                headers: {
-                    'Authorization' : `Bearer ${user.token}`
-                }
-            };
-            const data = await axios.post(`${base_url}/user/createcategory`, {
-                "id": bid,
-                "name": name
-            }, config);
-            history.push('/');
-            console.log('success', data);
-        } catch (error) {
-            console.log(error);
+                    }
+                };
+                const data = await axios.post(`${base_url}/user/createcategory`, {
+                    "id": bid,
+                    "name": name
+                }, config);
+                setMessage('Category has been created successfully!');
+                setTimeout(() => {
+                    setMessage('', history.push('/'));
+                }, 2000);
+                console.log('success', data);
+            } catch (error) {
+                setErrorMessage('Category has not been created..');
+                setTimeout(()=> {
+                    setErrorMessage('');
+                }, 2000);
+                console.log(error);
+            }
         }
     };
 

@@ -28,9 +28,13 @@ const Category = () => {
 
     useEffect(()=> {
         getPosts(id);
+        return () => {
+            setCategory(null);
+            setPosts([]);
+          };
     }, []);
 
-    if (posts.length == 0 || Category === null) {
+    if (posts.length === 0 || Category === null) {
         return null;
     }
 

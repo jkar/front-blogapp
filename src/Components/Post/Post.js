@@ -27,7 +27,9 @@ const Post = ({posts, bid}) => {
     };
 
     useEffect(() => {
-        getCategories();
+        if (posts.length !== 0) {
+            getCategories();
+        }
     }, [])
 
     if (post == null || categories == null) {

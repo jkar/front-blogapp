@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './CreatePost.css';
 import axios from "axios";
 import base_url from "../../API";
 
-const CreatePost = ({ bid, history }) => {
+const CreatePost = ({ bid, history, user, setMessage, setErrorMessage }) => {
     const [allcids, setAllcids] = useState(null);
     const [selectedcids, setSelectedcids] = useState([]);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const _isMounted = useRef(true); // Initial value _isMounted = true
+
+    useEffect(()=> {
+        return () => { // ComponentWillUnmount in Class Component
+            _isMounted.current = false;
+            setAllcids(null);
+            setSelectedcids([]);
+            setTitle('');
+            setContent('');
+        }
+    },[]);
 
     const getCategories = async (id) => {
         try {
@@ -27,21 +38,40 @@ const CreatePost = ({ bid, history }) => {
         getCategories(bid);
     }, []);
 
-
     const submit = async (e) => {
         e.preventDefault();
-        try {
-            const data = await axios.post(`${base_url}/user/createpost`, {
-                "title": title,
-                "content": content,
-                "cid": selectedcids
-            });
-            history.push('/');
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
+        // if (_isMounted.current) {
+            try {
+                const config = {
+                    headers: {
+                        'Authorization' : `Bearer ${user.token}`
+                    }
+                };
+                const data = await axios.post(`${base_url}/user/createpost`, {
+                    "title": title,
+                    "content": content,
+                    "cid": selectedcids
+                }, config);
+                setMessage('Post has been created successfully!');
+                setTitle('');
+                setContent('');
+                setSelectedcids([]);
+                setTimeout(() => {
+                    setMessage('', history.push('/'));
+                }, 2000);
+                console.log('success', data);
+            } catch (error) {
+                setErrorMessage('Post has not been created..');
+                setTitle('');
+                setContent('');
+                setSelectedcids([]);
+                setTimeout(()=> {
+                    setErrorMessage('');
+                }, 2000);
+                console.log(error);
+            }
+        // }
+    };
 
     const handleCheckboxes = (e) => {
         if(e.target.checked) {
