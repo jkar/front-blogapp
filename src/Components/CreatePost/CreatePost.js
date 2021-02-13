@@ -42,6 +42,13 @@ const CreatePost = ({ bid, history, user, setMessage, setErrorMessage }) => {
         e.preventDefault();
         // if (_isMounted.current) {
             try {
+                if (title === '' || content === '' || selectedcids.length === 0) {
+                    setErrorMessage('Title, Content is empty or Categories are not chosen')
+                    setTimeout(() => {
+                        setErrorMessage('');
+                    }, 1500);
+                    return
+                }
                 const config = {
                     headers: {
                         'Authorization' : `Bearer ${user.token}`
@@ -59,7 +66,6 @@ const CreatePost = ({ bid, history, user, setMessage, setErrorMessage }) => {
                 setTimeout(() => {
                     setMessage('', history.push('/'));
                 }, 2000);
-                console.log('success', data);
             } catch (error) {
                 setErrorMessage('Post has not been created..');
                 setTitle('');

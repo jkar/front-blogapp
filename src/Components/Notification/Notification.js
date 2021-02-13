@@ -6,14 +6,18 @@ const Notification = ({ message, errorMessage }) => {
         return null;
     } else if (errorMessage !== '') {
         return (
-            <div id="error-message">
-                <p>{errorMessage}</p>
+            <div id="error-message-outter">
+                <div className="inner">
+                    <p>{errorMessage}</p>
+                </div>
             </div>
         )
     } else if (message !== '') {
         return (
-            <div id="message">
-                <p>{message}</p>
+            <div id="message-outter">
+                <div className="inner">
+                    <p>{message}</p>
+                </div>
             </div>
         )
     }

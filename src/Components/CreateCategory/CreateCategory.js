@@ -22,6 +22,13 @@ const CreateCategory = ({bid, history, user, setMessage, setErrorMessage}) => {
         e.preventDefault();
         if (_isMounted.current) {
             try {
+                if (name === '') {
+                    setErrorMessage('Name is empty.. please add a name');
+                    setTimeout(() => {
+                        setErrorMessage('');
+                    }, 1500);
+                    return
+                }
                 const config = {
                     headers: {
                         'Authorization' : `Bearer ${user.token}`
@@ -36,7 +43,6 @@ const CreateCategory = ({bid, history, user, setMessage, setErrorMessage}) => {
                 setTimeout(() => {
                     setMessage('', history.push('/'));
                 }, 2000);
-                console.log('success', data);
             } catch (error) {
                 setErrorMessage('Category has not been created..');
                 setTimeout(()=> {
