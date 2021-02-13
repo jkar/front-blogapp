@@ -16,6 +16,6 @@
     justify-content: flex-start;
 }
 
-#posts div h1 a {
+#posts div h1 a, #posts div h3 a {
     text-decoration: none;
 }

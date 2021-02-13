@@ -8,6 +8,7 @@ import ShowPosts from "../ShowPosts/ShowPosts";
 import Category from "../Category/Category";
 import CreateCategory from "../CreateCategory/CreateCategory";
 import CreatePost from "../CreatePost/CreatePost";
+import EditPost from "../EditPost/EditPost";
 import base_url from '../../API';
 
 const Blog = ({blogs, user, setErrorMessage, setMessage}) => {
@@ -49,8 +50,9 @@ const Blog = ({blogs, user, setErrorMessage, setMessage}) => {
             null
             }
             <Switch>
-                <Route exact path={`/blog/${id}`} component={() => <ShowPosts blog={blog} posts={posts} id={id} />} />
+                <Route exact path={`/blog/${id}`} component={() => <ShowPosts blog={blog} blogs={blogs} posts={posts} id={id} user={user} />} />
                 <Route path={`/blog/${id}/post/:id`} component={() => <Post posts={posts} bid={id} /> } />
+                <Route path={`/blog/${id}/editpost/:id`} component={() => <EditPost posts={posts} bid={id} />} />
                 <Route path={`/blog/${id}/category/:id`} component={() => <Category />} />
                 <Route path={`/blog/${id}/createCategory`} component={()=> <CreateCategory bid={blog.id} history={history} user={user} setErrorMessage={setErrorMessage} setMessage={setMessage} /> } />
                 <Route path={`/blog/${id}/createPost`} component={()=> <CreatePost bid={blog.id} history={history} user={user} setErrorMessage={setErrorMessage} setMessage={setMessage} /> } />
