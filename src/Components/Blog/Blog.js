@@ -52,7 +52,7 @@ const Blog = ({blogs, user, setErrorMessage, setMessage}) => {
             <Switch>
                 <Route exact path={`/blog/${id}`} component={() => <ShowPosts blog={blog} blogs={blogs} posts={posts} id={id} user={user} />} />
                 <Route path={`/blog/${id}/post/:id`} component={() => <Post posts={posts} bid={id} /> } />
-                <Route path={`/blog/${id}/editpost/:id`} component={() => <EditPost posts={posts} bid={id} />} />
+                <Route path={`/blog/${id}/editpost/:id`} component={() => <EditPost posts={posts} bid={blog.id} user={user} setMessage={setMessage} setErrorMessage={setErrorMessage} history={history} />} />
                 <Route path={`/blog/${id}/category/:id`} component={() => <Category />} />
                 <Route path={`/blog/${id}/createCategory`} component={()=> <CreateCategory bid={blog.id} history={history} user={user} setErrorMessage={setErrorMessage} setMessage={setMessage} /> } />
                 <Route path={`/blog/${id}/createPost`} component={()=> <CreatePost bid={blog.id} history={history} user={user} setErrorMessage={setErrorMessage} setMessage={setMessage} /> } />
