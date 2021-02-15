@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import './EditPost.css';
 import axios from 'axios';
 import base_url from "../../API";
 import { useParams } from "react-router-dom";
@@ -120,12 +121,13 @@ const EditPost = ({ posts, bid, user, setMessage, setErrorMessage, history }) =>
     let categoryNames = categories.map(c => c.category.name);
 
     return (
-        <div>
-            <h3>Edit Post</h3>
+        <div id="edit-post">
+            <h3>Post</h3>
             <p><b>Title: </b>{post.title}</p>
             <p><b>Content: </b>{post.content}</p>
             <div><b>Categories: </b>{categoryNames.join()}</div>
             <br/>
+            <h2>Edit Post</h2>
             <form onSubmit={submit}>
                 <h3>Select Categories</h3>
                 {allcids.map((c, index) => {
